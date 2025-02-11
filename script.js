@@ -3,9 +3,56 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function generateQR() {
-    const text = document.getElementById("qr-text").value;
-    if (!text) {
-        alert("Please enter some text or URL");
+    const selectedOverlay = document.querySelector('.overlay-preview.selected');
+    let qrText = '';
+    
+    if (selectedOverlay) {
+        const platform = selectedOverlay.getAttribute('data-platform');
+        switch(platform) {
+            case 'wifi':
+                const ssid = document.getElementById('wifi-ssid').value;
+                const password = document.getElementById('wifi-password').value;
+                const encryption = document.getElementById('wifi-encryption').value;
+                qrText = `WIFI:T:${encryption};S:${ssid};P:${password};;`;
+                break;
+            
+            case 'email':
+                const to = document.getElementById('email-to').value;
+                const subject = document.getElementById('email-subject').value;
+                const body = document.getElementById('email-body').value;
+                qrText = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                break;
+            
+            case 'phone':
+                const phone = document.getElementById('contact-phone').value;
+                qrText = `tel:${phone}`;
+                break;
+            
+            case 'bitcoin':
+                const btcAddress = document.getElementById('crypto-address').value;
+                qrText = `bitcoin:${btcAddress}`;
+                break;
+            
+            case 'instagram':
+            case 'facebook':
+            case 'twitter':
+            case 'youtube':
+            case 'tiktok':
+            case 'snapchat':
+            case 'pinterest':
+                const username = document.getElementById('social-username').value;
+                qrText = `https://${platform}.com/${username}`;
+                break;
+            
+            default:
+                qrText = document.getElementById('qr-text').value;
+        }
+    } else {
+        qrText = document.getElementById('qr-text').value;
+    }
+
+    if (!qrText) {
+        alert("Please fill in the required information");
         return;
     }
 
@@ -20,7 +67,7 @@ function generateQR() {
     // Generate QR Code
     const qr = new QRious({
         element: canvas,
-        value: text,
+        value: qrText,
         size: size,
         foreground: color,
         background: 'white',
@@ -28,8 +75,6 @@ function generateQR() {
         level: 'H' // Highest error correction for overlay
     });
 
-    const selectedOverlay = document.querySelector('.overlay-preview.selected');
-    
     if (selectedOverlay) {
         const overlay = new Image();
         overlay.crossOrigin = "anonymous";
@@ -50,37 +95,84 @@ function generateQR() {
             ctx.drawImage(overlay, x, y, overlaySize, overlaySize);
             
             // Save to history and setup download
-            finalizeQRCode(canvas, text, size, color);
+            finalizeQRCode(canvas, qrText, size, color);
         };
         
         overlay.onerror = function(e) {
             console.error('Error loading overlay:', e);
-            finalizeQRCode(canvas, text, size, color);
+            finalizeQRCode(canvas, qrText, size, color);
         };
     } else {
-        finalizeQRCode(canvas, text, size, color);
+        finalizeQRCode(canvas, qrText, size, color);
     }
 }
 
+// ...existing code...
+
 function finalizeQRCode(canvas, text, size, color) {
-    // Setup download button
     const downloadContainer = document.getElementById("download-container");
     downloadContainer.innerHTML = '';
 
     const downloadLink = document.createElement("a");
     downloadLink.href = canvas.toDataURL("image/png");
-    downloadLink.download = `qrcode_${Date.now()}.png`;
+    const fileName = `qrcode_${Date.now()}.png`;
+    downloadLink.download = fileName;
     
+    // Create download button with icon
     const downloadButton = document.createElement("button");
     downloadButton.className = "button button-success";
     downloadButton.innerHTML = '<i class="fas fa-download"></i> Download QR Code';
-    downloadLink.appendChild(downloadButton);
     
+    // Add click event to show notification
+    downloadButton.addEventListener('click', () => {
+        showDownloadNotification(fileName);
+    });
+    
+    downloadLink.appendChild(downloadButton);
     downloadContainer.appendChild(downloadLink);
+
+    // Add download location info
+    const locationInfo = document.createElement("div");
+    locationInfo.className = "download-info";
+    locationInfo.innerHTML = `
+        <i class="fas fa-folder-open"></i>
+        <span>Downloads folder: ${fileName}</span>
+    `;
+    downloadContainer.appendChild(locationInfo);
 
     // Save to history
     saveToHistory(text, canvas.toDataURL(), size, color);
 }
+
+// Add new function for download notification
+function showDownloadNotification(fileName) {
+    const notification = document.createElement("div");
+    notification.className = "download-notification";
+    notification.innerHTML = `
+        <i class="fas fa-check-circle"></i>
+        <div class="notification-content">
+            <p>Download Complete!</p>
+            <small>Saved as: ${fileName}</small>
+        </div>
+        <button class="close-notification">×</button>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto remove notification after 5 seconds
+    setTimeout(() => {
+        notification.classList.add('fade-out');
+        setTimeout(() => notification.remove(), 300);
+    }, 5000);
+
+    // Close button functionality
+    notification.querySelector('.close-notification').addEventListener('click', () => {
+        notification.classList.add('fade-out');
+        setTimeout(() => notification.remove(), 300);
+    });
+}
+
+// ...existing code...
 
 function saveToHistory(text, dataUrl, size, color) {
     let history = JSON.parse(localStorage.getItem('qrHistory') || '[]');
@@ -161,6 +253,41 @@ function showSection(section) {
 function selectOverlay(element) {
     document.querySelectorAll('.overlay-preview').forEach(el => el.classList.remove('selected'));
     element.classList.add('selected');
+    
+    // Hide all input groups first
+    document.querySelectorAll('.input-group').forEach(el => el.classList.add('hidden'));
+    
+    // Show relevant input based on platform
+    const platform = element.getAttribute('data-platform');
+    switch(platform) {
+        case 'wifi':
+            document.getElementById('wifi-input').classList.remove('hidden');
+            break;
+        case 'email':
+            document.getElementById('email-input').classList.remove('hidden');
+            break;
+        case 'phone':
+            document.getElementById('contact-input').classList.remove('hidden');
+            break;
+        case 'bitcoin':
+        case 'eth':
+        case 'bnb':
+            document.getElementById('crypto-input').classList.remove('hidden');
+            break;
+        case 'instagram':
+        case 'facebook':
+        case 'twitter':
+        case 'youtube':
+        case 'tiktok':
+        case 'snapchat':
+        case 'pinterest':
+            document.getElementById('social-input').classList.remove('hidden');
+            break;
+        default:
+            document.getElementById('default-input').classList.remove('hidden');
+    }
+    
+    document.getElementById('overlay-sidebar').classList.remove('active');
 }
 
 function handleCustomOverlay(input) {
@@ -194,3 +321,11 @@ function updateCustomColor(input) {
     document.querySelectorAll('.color-preset').forEach(el => el.classList.remove('selected'));
     generateQR(); // Regenerate QR code with new color
 }
+
+document.getElementById('sidebar-toggle').addEventListener('click', function() {
+    document.getElementById('overlay-sidebar').classList.add('active');
+});
+
+document.querySelector('.close-sidebar').addEventListener('click', function() {
+    document.getElementById('overlay-sidebar').classList.remove('active');
+});
