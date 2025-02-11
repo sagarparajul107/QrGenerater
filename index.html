@@ -13,6 +13,9 @@
     <header class="header">
         <div class="nav-container">
             <div class="logo">QR Generator</div>
+            <button id="sidebar-toggle" class="sidebar-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
             <div class="nav-tabs">
                 <button class="nav-tab active" onclick="showSection('generator')">Generate</button>
                 <button class="nav-tab" onclick="showSection('history')">History</button>
@@ -20,14 +23,83 @@
         </div>
     </header>
 
+    <div id="overlay-sidebar" class="overlay-sidebar">
+        <div class="sidebar-header">
+            <h3>Select Overlay</h3>
+            <button class="close-sidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="sidebar-content">
+            <div class="overlay-options">
+                <div class="social-overlay">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/132px-Instagram_logo_2016.svg.png" 
+                         class="overlay-preview" data-platform="instagram" onclick="selectOverlay(this)" alt="Instagram">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/100px-Facebook_f_logo_%282019%29.svg.png"
+                         class="overlay-preview" data-platform="facebook" onclick="selectOverlay(this)" alt="Facebook">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/150px-Logo_of_Twitter.svg.png"
+                         class="overlay-preview" data-platform="twitter" onclick="selectOverlay(this)" alt="Twitter">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/159px-YouTube_full-color_icon_%282017%29.svg.png"
+                         class="overlay-preview" data-platform="youtube" onclick="selectOverlay(this)" alt="YouTube">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYcFmGrpfc8OdigSHyqoMusCGGa67hcXLEyw&s"
+                         class="overlay-preview" data-platform="tiktok" onclick="selectOverlay(this)" alt="TikTok">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2lYPXEZ3djlqzWwFpUeJzcEqdNc5_7dpU3A&s"
+                         class="overlay-preview" data-platform="snapchat" onclick="selectOverlay(this)" alt="Snapchat">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Pinterest-logo.png/128px-Pinterest-logo.png"
+                         class="overlay-preview" data-platform="pinterest" onclick="selectOverlay(this)" alt="Pinterest">
+                    
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Netflix_2015_N_logo.svg/128px-Netflix_2015_N_logo.svg.png"
+                         class="overlay-preview" data-platform="netflix" onclick="selectOverlay(this)" alt="Netflix">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFYrT7QBvmjKVqHWpnUYJPx9P8CUsr0qi9mg&s"
+                         class="overlay-preview" data-platform="zoom" onclick="selectOverlay(this)" alt="Zoom">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Amazon_icon.svg/128px-Amazon_icon.svg.png"
+                         class="overlay-preview" data-platform="amazon" onclick="selectOverlay(this)" alt="Amazon">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgGjFUVWK4J2MIASw1cHh5JU9kfxWYiEAcPA&s"
+                         class="overlay-preview" data-platform="viber" onclick="selectOverlay(this)" alt="Viber">
+                    
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/WiFi_Logo.svg/128px-WiFi_Logo.svg.png"
+                         class="overlay-preview" data-platform="wifi" onclick="selectOverlay(this)" alt="WiFi">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/128px-Gmail_icon_%282020%29.svg.png"
+                         class="overlay-preview" data-platform="email" onclick="selectOverlay(this)" alt="Email">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Phone_font_awesome.svg/128px-Phone_font_awesome.svg.png"
+                         class="overlay-preview" data-platform="phone" onclick="selectOverlay(this)" alt="Phone">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/128px-HTML5_logo_and_wordmark.svg.png"
+                         class="overlay-preview" data-platform="website" onclick="selectOverlay(this)" alt="Website">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ7IFUpywCGfA5UmeDw1KbWE0M6Ft-In-S_w&s"
+                         class="overlay-preview" data-platform="text" onclick="selectOverlay(this)" alt="Text">
+                    
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/128px-Bitcoin.svg.png" 
+                         class="overlay-preview" data-platform="bitcoin" onclick="selectOverlay(this)" alt="Bitcoin">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Binance-coin-bnb-logo.png/128px-Binance-coin-bnb-logo.png" 
+                         class="overlay-preview" data-platform="bnb" onclick="selectOverlay(this)" alt="BNB">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ethereum-icon-purple.svg/128px-Ethereum-icon-purple.svg.png" 
+                         class="overlay-preview" data-platform="eth" onclick="selectOverlay(this)" alt="ETH">
+                    
+                    <img src="https://www.pngplay.com/wp-content/uploads/10/Garena-Free-Fire-Logo-PNG-HD-Images.png" 
+                         class="overlay-preview" data-platform="freefire" onclick="selectOverlay(this)" alt="Free Fire">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi3eAG6DorcyUtSmjlG43orQ-txhDt49Qbbw&s" 
+                         class="overlay-preview" data-platform="pubg" onclick="selectOverlay(this)" alt="PUBG">
+                    
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Apple_logo_grey.svg/128px-Apple_logo_grey.svg.png" 
+                         class="overlay-preview" data-platform="apple" onclick="selectOverlay(this)" alt="Apple">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlR7hqr2ovNhzgsBCRypuT0KLdmZIF3admGw&s" 
+                         class="overlay-preview" data-platform="android" onclick="selectOverlay(this)" alt="Android">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/128px-Windows_logo_-_2012.svg.png"
+                         class="overlay-preview" data-platform="laptop" onclick="selectOverlay(this)" alt="Laptop">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Desktop_computer_clipart_-_Yellow_theme.svg/128px-Desktop_computer_clipart_-_Yellow_theme.svg.png" 
+                         class="overlay-preview" data-platform="computer" onclick="selectOverlay(this)" alt="Computer">
+                </div>
+                <div class="custom-upload" onclick="document.getElementById('custom-overlay').click()">
+                    <input type="file" id="custom-overlay" hidden accept="image/*" onchange="handleCustomOverlay(this)">
+                    <i class="fas fa-upload"></i> Upload Custom Overlay
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="app-container">
         <section id="generator" class="content-section" style="display: block;">
             <div class="card">
-                <div class="input-group">
-                    <label class="input-label" for="qr-text">Text or URL</label>
-                    <input type="text" id="qr-text" class="text-input" placeholder="Enter text or URL to generate QR code">
-                </div>
-
                 <div class="qr-options">
                     <select id="qr-size" class="text-input">
                         <option value="200">Small (200x200)</option>
@@ -48,75 +120,52 @@
                     </div>
                 </div>
 
-                <div class="overlay-options">
-                    <label class="input-label">Select Overlay</label>
-                    <div class="social-overlay">
-                        <!-- Social Media -->
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/132px-Instagram_logo_2016.svg.png" 
-                             class="overlay-preview" data-platform="instagram" onclick="selectOverlay(this)" alt="Instagram">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/100px-Facebook_f_logo_%282019%29.svg.png"
-                             class="overlay-preview" data-platform="facebook" onclick="selectOverlay(this)" alt="Facebook">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/150px-Logo_of_Twitter.svg.png"
-                             class="overlay-preview" data-platform="twitter" onclick="selectOverlay(this)" alt="Twitter">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/159px-YouTube_full-color_icon_%282017%29.svg.png"
-                             class="overlay-preview" data-platform="youtube" onclick="selectOverlay(this)" alt="YouTube">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYcFmGrpfc8OdigSHyqoMusCGGa67hcXLEyw&s"
-                             class="overlay-preview" data-platform="tiktok" onclick="selectOverlay(this)" alt="TikTok">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2lYPXEZ3djlqzWwFpUeJzcEqdNc5_7dpU3A&s"
-                             class="overlay-preview" data-platform="snapchat" onclick="selectOverlay(this)" alt="Snapchat">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Pinterest-logo.png/128px-Pinterest-logo.png"
-                             class="overlay-preview" data-platform="pinterest" onclick="selectOverlay(this)" alt="Pinterest">
-                        
-                        <!-- Streaming & Communication -->
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Netflix_2015_N_logo.svg/128px-Netflix_2015_N_logo.svg.png"
-                             class="overlay-preview" data-platform="netflix" onclick="selectOverlay(this)" alt="Netflix">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFYrT7QBvmjKVqHWpnUYJPx9P8CUsr0qi9mg&s"
-                             class="overlay-preview" data-platform="zoom" onclick="selectOverlay(this)" alt="Zoom">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Amazon_icon.svg/128px-Amazon_icon.svg.png"
-                             class="overlay-preview" data-platform="amazon" onclick="selectOverlay(this)" alt="Amazon">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgGjFUVWK4J2MIASw1cHh5JU9kfxWYiEAcPA&s"
-                             class="overlay-preview" data-platform="viber" onclick="selectOverlay(this)" alt="Viber">
-
-                        <!-- Utilities -->
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/WiFi_Logo.svg/128px-WiFi_Logo.svg.png"
-                             class="overlay-preview" data-platform="wifi" onclick="selectOverlay(this)" alt="WiFi">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/128px-Gmail_icon_%282020%29.svg.png"
-                             class="overlay-preview" data-platform="email" onclick="selectOverlay(this)" alt="Email">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Phone_font_awesome.svg/128px-Phone_font_awesome.svg.png"
-                             class="overlay-preview" data-platform="phone" onclick="selectOverlay(this)" alt="Phone">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/128px-HTML5_logo_and_wordmark.svg.png"
-                             class="overlay-preview" data-platform="website" onclick="selectOverlay(this)" alt="Website">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ7IFUpywCGfA5UmeDw1KbWE0M6Ft-In-S_w&s"
-                             class="overlay-preview" data-platform="text" onclick="selectOverlay(this)" alt="Text">
-
-                        <!-- Cryptocurrency -->
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/128px-Bitcoin.svg.png" 
-                             class="overlay-preview" data-platform="bitcoin" onclick="selectOverlay(this)" alt="Bitcoin">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Binance-coin-bnb-logo.png/128px-Binance-coin-bnb-logo.png" 
-                             class="overlay-preview" data-platform="bnb" onclick="selectOverlay(this)" alt="BNB">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ethereum-icon-purple.svg/128px-Ethereum-icon-purple.svg.png" 
-                             class="overlay-preview" data-platform="eth" onclick="selectOverlay(this)" alt="ETH">
-
-                        <!-- Gaming -->
-                        <img src="https://www.pngplay.com/wp-content/uploads/10/Garena-Free-Fire-Logo-PNG-HD-Images.png" 
-                             class="overlay-preview" data-platform="freefire" onclick="selectOverlay(this)" alt="Free Fire">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi3eAG6DorcyUtSmjlG43orQ-txhDt49Qbbw&s" 
-                             class="overlay-preview" data-platform="pubg" onclick="selectOverlay(this)" alt="PUBG">
-
-                        <!-- Devices & OS -->
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Apple_logo_grey.svg/128px-Apple_logo_grey.svg.png" 
-                             class="overlay-preview" data-platform="apple" onclick="selectOverlay(this)" alt="Apple">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlR7hqr2ovNhzgsBCRypuT0KLdmZIF3admGw&s" 
-                             class="overlay-preview" data-platform="android" onclick="selectOverlay(this)" alt="Android">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/128px-Windows_logo_-_2012.svg.png"
-                             class="overlay-preview" data-platform="laptop" onclick="selectOverlay(this)" alt="Laptop">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Desktop_computer_clipart_-_Yellow_theme.svg/128px-Desktop_computer_clipart_-_Yellow_theme.svg.png" 
-                             class="overlay-preview" data-platform="computer" onclick="selectOverlay(this)" alt="Computer">
+                <!-- Add this new dynamic input container after qr-options -->
+                <div id="dynamic-inputs" class="dynamic-inputs">
+                    <!-- Default text input -->
+                    <div class="input-group" id="default-input">
+                        <label class="input-label">Text or URL</label>
+                        <input type="text" id="qr-text" class="text-input" placeholder="Enter text or URL">
                     </div>
 
-                    <div class="custom-upload" onclick="document.getElementById('custom-overlay').click()">
-                        <input type="file" id="custom-overlay" hidden accept="image/*" onchange="handleCustomOverlay(this)">
-                        <i class="fas fa-upload"></i> Upload Custom Overlay
+                    <!-- Social Media Inputs -->
+                    <div class="input-group hidden" id="social-input">
+                        <label class="input-label">Username/Profile ID</label>
+                        <input type="text" id="social-username" class="text-input" placeholder="Enter your username or profile ID">
+                    </div>
+
+                    <!-- WiFi Configuration -->
+                    <div class="input-group hidden" id="wifi-input">
+                        <label class="input-label">WiFi Details</label>
+                        <input type="text" id="wifi-ssid" class="text-input" placeholder="Network Name (SSID)">
+                        <input type="password" id="wifi-password" class="text-input" placeholder="Password">
+                        <select id="wifi-encryption" class="text-input">
+                            <option value="WPA">WPA/WPA2</option>
+                            <option value="WEP">WEP</option>
+                            <option value="nopass">No Password</option>
+                        </select>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="input-group hidden" id="contact-input">
+                        <label class="input-label">Contact Details</label>
+                        <input type="text" id="contact-name" class="text-input" placeholder="Full Name">
+                        <input type="tel" id="contact-phone" class="text-input" placeholder="Phone Number">
+                        <input type="email" id="contact-email" class="text-input" placeholder="Email">
+                    </div>
+
+                    <!-- Cryptocurrency -->
+                    <div class="input-group hidden" id="crypto-input">
+                        <label class="input-label">Wallet Address</label>
+                        <input type="text" id="crypto-address" class="text-input" placeholder="Enter your wallet address">
+                    </div>
+
+                    <!-- Email Composition -->
+                    <div class="input-group hidden" id="email-input">
+                        <label class="input-label">Email Details</label>
+                        <input type="email" id="email-to" class="text-input" placeholder="To Email">
+                        <input type="text" id="email-subject" class="text-input" placeholder="Subject">
+                        <textarea id="email-body" class="text-input" placeholder="Email Body"></textarea>
                     </div>
                 </div>
 
