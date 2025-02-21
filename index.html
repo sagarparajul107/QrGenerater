@@ -12,13 +12,46 @@
 <body>
     <header class="header">
         <div class="nav-container">
-            <div class="logo">QR Generator</div>
-            <button id="sidebar-toggle" class="sidebar-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="nav-tabs">
-                <button class="nav-tab active" onclick="showSection('generator')">Generate</button>
-                <button class="nav-tab" onclick="showSection('history')">History</button>
+            <div class="logo-section">
+                <i class="fas fa-qrcode logo-icon"></i>
+                <div class="logo-text">
+                    <h1>QR Generator</h1>
+                    <span class="logo-subtitle">Create Custom QR Codes</span>
+                </div>
+            </div>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <!-- Mobile Navigation Menu -->
+                <div class="mobile-menu">
+                    <button id="mobile-nav-toggle" class="mobile-nav-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div id="mobile-nav" class="mobile-nav">
+                        <button onclick="showSection('generator')" class="mobile-nav-item">
+                            <i class="fas fa-plus-circle"></i> Generate
+                        </button>
+                        <button onclick="showSection('history')" class="mobile-nav-item">
+                            <i class="fas fa-history"></i> History
+                        </button>
+                        <button onclick="openOverlaySidebar()" class="mobile-nav-item">
+                            <i class="fas fa-images"></i> Overlays
+                        </button>
+                    </div>
+                </div>
+                <!-- Desktop Navigation -->
+                <div class="nav-tabs desktop-only">
+                    <button class="nav-tab active" onclick="showSection('generator')">
+                        <i class="fas fa-plus-circle"></i> Generate
+                    </button>
+                    <button class="nav-tab" onclick="showSection('history')">
+                        <i class="fas fa-history"></i> History
+                    </button>
+                    <button class="nav-tab" onclick="openOverlaySidebar()">
+                        <i class="fas fa-images"></i> Overlays
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -33,60 +66,60 @@
         <div class="sidebar-content">
             <div class="overlay-options">
                 <div class="social-overlay">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/132px-Instagram_logo_2016.svg.png" 
+                    <img src="instgram.jpeg" 
                          class="overlay-preview" data-platform="instagram" onclick="selectOverlay(this)" alt="Instagram">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/100px-Facebook_f_logo_%282019%29.svg.png"
+                    <img src="facebook.png"
                          class="overlay-preview" data-platform="facebook" onclick="selectOverlay(this)" alt="Facebook">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/150px-Logo_of_Twitter.svg.png"
+                    <img src="Twitter.png"
                          class="overlay-preview" data-platform="twitter" onclick="selectOverlay(this)" alt="Twitter">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/159px-YouTube_full-color_icon_%282017%29.svg.png"
+                    <img src="youtube.png"
                          class="overlay-preview" data-platform="youtube" onclick="selectOverlay(this)" alt="YouTube">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYcFmGrpfc8OdigSHyqoMusCGGa67hcXLEyw&s"
+                    <img src="tiktok.png"
                          class="overlay-preview" data-platform="tiktok" onclick="selectOverlay(this)" alt="TikTok">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2lYPXEZ3djlqzWwFpUeJzcEqdNc5_7dpU3A&s"
+                    <img src="snapchat.png"
                          class="overlay-preview" data-platform="snapchat" onclick="selectOverlay(this)" alt="Snapchat">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Pinterest-logo.png/128px-Pinterest-logo.png"
+                    <img src="Pinterest-logo.png"
                          class="overlay-preview" data-platform="pinterest" onclick="selectOverlay(this)" alt="Pinterest">
                     
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Netflix_2015_N_logo.svg/128px-Netflix_2015_N_logo.svg.png"
+                    <img src="netflx.png"
                          class="overlay-preview" data-platform="netflix" onclick="selectOverlay(this)" alt="Netflix">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFYrT7QBvmjKVqHWpnUYJPx9P8CUsr0qi9mg&s"
+                    <img src="zoom.png"
                          class="overlay-preview" data-platform="zoom" onclick="selectOverlay(this)" alt="Zoom">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Amazon_icon.svg/128px-Amazon_icon.svg.png"
+                    <img src="Amazon.png"
                          class="overlay-preview" data-platform="amazon" onclick="selectOverlay(this)" alt="Amazon">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgGjFUVWK4J2MIASw1cHh5JU9kfxWYiEAcPA&s"
+                    <img src="viber.jpeg"
                          class="overlay-preview" data-platform="viber" onclick="selectOverlay(this)" alt="Viber">
                     
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/WiFi_Logo.svg/128px-WiFi_Logo.svg.png"
+                    <img src="wifi.png"
                          class="overlay-preview" data-platform="wifi" onclick="selectOverlay(this)" alt="WiFi">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/128px-Gmail_icon_%282020%29.svg.png"
+                    <img src="gmail.png"
                          class="overlay-preview" data-platform="email" onclick="selectOverlay(this)" alt="Email">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Phone_font_awesome.svg/128px-Phone_font_awesome.svg.png"
+                    <img src="phone.png"
                          class="overlay-preview" data-platform="phone" onclick="selectOverlay(this)" alt="Phone">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/128px-HTML5_logo_and_wordmark.svg.png"
+                    <img src="html.png"
                          class="overlay-preview" data-platform="website" onclick="selectOverlay(this)" alt="Website">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ7IFUpywCGfA5UmeDw1KbWE0M6Ft-In-S_w&s"
+                    <img src="text.png"
                          class="overlay-preview" data-platform="text" onclick="selectOverlay(this)" alt="Text">
                     
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/128px-Bitcoin.svg.png" 
+                    <img src="bitcoin.png" 
                          class="overlay-preview" data-platform="bitcoin" onclick="selectOverlay(this)" alt="Bitcoin">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Binance-coin-bnb-logo.png/128px-Binance-coin-bnb-logo.png" 
+                    <img src="bnb.png" 
                          class="overlay-preview" data-platform="bnb" onclick="selectOverlay(this)" alt="BNB">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ethereum-icon-purple.svg/128px-Ethereum-icon-purple.svg.png" 
+                    <img src="eth.png" 
                          class="overlay-preview" data-platform="eth" onclick="selectOverlay(this)" alt="ETH">
                     
-                    <img src="https://www.pngplay.com/wp-content/uploads/10/Garena-Free-Fire-Logo-PNG-HD-Images.png" 
+                    <img src="Garena.png" 
                          class="overlay-preview" data-platform="freefire" onclick="selectOverlay(this)" alt="Free Fire">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi3eAG6DorcyUtSmjlG43orQ-txhDt49Qbbw&s" 
+                    <img src="pubg.png" 
                          class="overlay-preview" data-platform="pubg" onclick="selectOverlay(this)" alt="PUBG">
                     
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Apple_logo_grey.svg/128px-Apple_logo_grey.svg.png" 
+                    <img src="Apple.png" 
                          class="overlay-preview" data-platform="apple" onclick="selectOverlay(this)" alt="Apple">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlR7hqr2ovNhzgsBCRypuT0KLdmZIF3admGw&s" 
+                    <img src="android.png" 
                          class="overlay-preview" data-platform="android" onclick="selectOverlay(this)" alt="Android">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/128px-Windows_logo_-_2012.svg.png"
+                    <img src="Windows.png"
                          class="overlay-preview" data-platform="laptop" onclick="selectOverlay(this)" alt="Laptop">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Desktop_computer_clipart_-_Yellow_theme.svg/128px-Desktop_computer_clipart_-_Yellow_theme.svg.png" 
+                    <img src="desktop.png" 
                          class="overlay-preview" data-platform="computer" onclick="selectOverlay(this)" alt="Computer">
                 </div>
                 <div class="custom-upload" onclick="document.getElementById('custom-overlay').click()">
@@ -96,6 +129,7 @@
             </div>
         </div>
     </div>
+    <div class="overlay-backdrop"></div>
 
     <div class="app-container">
         <section id="generator" class="content-section" style="display: block;">
